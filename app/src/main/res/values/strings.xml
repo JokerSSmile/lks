@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Личный кабинет студента</string>
+
+    <!-- Main info -->
+    <string name="student_name">Имя</string>
+    <string name="student_surname">Фамилия</string>
+    <string name="student_group">ПС-11</string>
+
+    <!-- Pages titles -->
+    <string name="info">Обо мне</string>
+    <string name="schedule">Расписание</string>
+    <string name="education">Образование</string>
+    <string name="achievements">Достижения</string>
+    <string name="progress">Успеваемость</string>
+    <string name="grants">Стипендии</string>
+    <string name="settings">Настройки</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+</resources>

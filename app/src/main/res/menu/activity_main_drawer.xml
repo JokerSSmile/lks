@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/main_group" android:checkableBehavior="single">
+        <item
+            android:id="@+id/info_page"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/info"/>
+        <item
+            android:id="@+id/schedule"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/schedule"/>
+        <item
+            android:id="@+id/education"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/education"/>
+        <item
+            android:id="@+id/achievements"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/achievements"/>
+        <item
+            android:id="@+id/progress"
+            android:icon="@drawable/ic_menu_send"
+            android:title="@string/progress"/>
+        <item
+            android:id="@+id/grants"
+            android:icon="@drawable/ic_menu_share"
+            android:title="@string/grants"/>
+    </group>
+
+    <item
+        android:id="@+id/nav_share"
+        android:icon="@drawable/ic_menu_manage"
+        android:title="@string/settings"/>
+
+</menu>
