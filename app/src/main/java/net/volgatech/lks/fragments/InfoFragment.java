@@ -1,8 +1,6 @@
 package net.volgatech.lks.fragments;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,7 +13,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-import net.volgatech.lks.HttpHandler;
+import net.volgatech.lks.web_utils.HttpHandler;
 import net.volgatech.lks.R;
 import net.volgatech.lks.activity.MainActivity;
 
@@ -36,16 +34,10 @@ public class InfoFragment extends Fragment {
     private String TAG = MainActivity.class.getSimpleName();
 
     private ProgressDialog pDialog;
-    private ListView lv;
-
-    FileInputStream fin;
-    FileOutputStream fos;
-
-    // URL to get contacts JSON
-    private static String url = "http://api.androidhive.info/contacts/";
-
-    ArrayList<HashMap<String, String>> contactList;
-
+    private FileInputStream fin;
+    private FileOutputStream fos;
+    private static final String url = "http://api.androidhive.info/contacts/";
+    private ArrayList<HashMap<String, String>> contactList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +46,11 @@ public class InfoFragment extends Fragment {
         contactList = new ArrayList<>();
         new GetContacts().execute();
         return inflater.inflate(R.layout.info_fragment, container, false);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     public void SaveJSFile(String strFile, String nameFile){
@@ -77,12 +74,6 @@ public class InfoFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-
-        super.onAttach(activity);
-    }
-
     public String OpenJS(String fileName) {
         String text = null;
         try {
@@ -92,17 +83,16 @@ public class InfoFragment extends Fragment {
             text = new String(bytes);
         }
         catch(IOException ex){
-            Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
-        finally{
-
+        finally {
             try{
-                if(fin!=null)
+                if(fin!=null) {
                     fin.close();
+                }
             }
             catch(IOException ex){
-
-                Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
         return text;
@@ -118,15 +108,14 @@ public class InfoFragment extends Fragment {
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
-
         }
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            HttpHandler sh = new HttpHandler();
+            HttpHandler httpHandler = new HttpHandler();
 
             // Making a request to url and getting response
-            String jsonStr = sh.makeServiceCall(url);
+            String jsonStr = httpHandler.makeServiceCall(url);
 
             Log.e(TAG, "Response from url: " + jsonStr);
             //SaveJSFile(jsonStr, "5.js");
@@ -140,18 +129,15 @@ public class InfoFragment extends Fragment {
 
                     // looping through All Contacts
                     for (int i = 0; i < contacts.length(); i++) {
+
                         JSONObject c = contacts.getJSONObject(i);
                         String id = c.getString("id");
                         String name = c.getString("name");
                         String email = c.getString("email");
-                        String address = c.getString("address");
-                        String gender = c.getString("gender");
 
                         // Phone node is JSON Object
                         JSONObject phone = c.getJSONObject("phone");
                         String mobile = phone.getString("mobile");
-                        String home = phone.getString("home");
-                        String office = phone.getString("office");
 
                         // tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
@@ -203,7 +189,7 @@ public class InfoFragment extends Fragment {
                 pDialog.dismiss();
 
              //Updating parsed JSON data into ListView
-            lv = (ListView)getActivity().findViewById(R.id.list);
+            ListView lv = (ListView) getActivity().findViewById(R.id.list);
 
             ListAdapter adapter = new SimpleAdapter(
                     getActivity(),  contactList,
@@ -212,9 +198,6 @@ public class InfoFragment extends Fragment {
                     R.id.email, R.id.mobile});
 
             lv.setAdapter(adapter);
-
         }
-
     }
-
 }
