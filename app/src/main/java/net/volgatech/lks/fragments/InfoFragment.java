@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,23 +30,25 @@ import java.util.HashMap;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class InfoFragment extends Fragment {
-
-    private String TAG = MainActivity.class.getSimpleName();
-
-    private ProgressDialog pDialog;
-    private FileInputStream fin;
-    private FileOutputStream fos;
-    private static final String url = "http://api.androidhive.info/contacts/";
-    private ArrayList<HashMap<String, String>> contactList;
+    public class InfoFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+        SwipeRefreshLayout swipeLayout;
+        private String TAG = MainActivity.class.getSimpleName();
+        private ProgressDialog pDialog;
+        private FileInputStream fin;
+        private FileOutputStream fos;
+        private static final String url = "http://api.androidhive.info/contacts/";
+        private ArrayList<HashMap<String, String>> contactList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-
+        View view = inflater.inflate(R.layout.info_fragment, container, false);
+        swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.new_page_activity);
+        swipeLayout.setOnRefreshListener(this);
         contactList = new ArrayList<>();
         new GetContacts().execute();
-        return inflater.inflate(R.layout.info_fragment, container, false);
+        return view;
+
     }
 
     @Override
@@ -98,16 +101,28 @@ public class InfoFragment extends Fragment {
         return text;
     }
 
+    @Override
+    public void onRefresh() {
+        Log.e(TAG, "Swipe done");
+
+        new GetContacts().execute();
+        swipeLayout.setRefreshing(false);
+
+    }
+
     private class GetContacts extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            // Showing progress dialog
-            pDialog = new ProgressDialog(getActivity());
-            pDialog.setMessage("Please wait...");
-            pDialog.setCancelable(false);
-            pDialog.show();
+            if (!swipeLayout.isRefreshing()){
+                // Showing progress dialog
+                pDialog = new ProgressDialog(getActivity());
+                pDialog.setMessage("Загрузка...");
+                pDialog.setCancelable(false);
+                pDialog.show();
+            }
+
         }
 
         @Override
@@ -118,8 +133,12 @@ public class InfoFragment extends Fragment {
             String jsonStr = httpHandler.makeServiceCall(url);
 
             Log.e(TAG, "Response from url: " + jsonStr);
-            //SaveJSFile(jsonStr, "5.js");
-            jsonStr = OpenJS("5.js");
+            if (jsonStr == null){
+                jsonStr = OpenJS("5.js");
+            }
+            else {
+                SaveJSFile(jsonStr, "5.js");
+            }
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
@@ -185,7 +204,7 @@ public class InfoFragment extends Fragment {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             // Dismiss the progress dialog
-            if (pDialog.isShowing())
+            if (pDialog.isShowing() && (!swipeLayout.isRefreshing()))
                 pDialog.dismiss();
 
              //Updating parsed JSON data into ListView
