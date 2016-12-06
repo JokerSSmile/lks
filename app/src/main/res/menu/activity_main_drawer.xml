@@ -4,33 +4,40 @@
     <group android:id="@+id/main_group" android:checkableBehavior="single">
         <item
             android:id="@+id/info_page"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_about"
             android:title="@string/info"/>
         <item
             android:id="@+id/schedule"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_menu_schedule"
             android:title="@string/schedule"/>
         <item
             android:id="@+id/education"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_menu_education"
             android:title="@string/education"/>
         <item
             android:id="@+id/achievements"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_menu_achievements"
             android:title="@string/achievements"/>
         <item
             android:id="@+id/progress"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/ic_menu_progress"
             android:title="@string/progress"/>
         <item
             android:id="@+id/grants"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_menu_grants"
             android:title="@string/grants"/>
     </group>
 
-    <item
-        android:id="@+id/nav_share"
-        android:icon="@drawable/ic_menu_manage"
-        android:title="@string/settings"/>
+    <group android:id="@+id/secondary_group" android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_menu_settings"
+            android:title="@string/settings"/>
+        <item
+            android:id="@+id/exit"
+            android:icon="@drawable/ic_menu_exit"
+            android:title="@string/exit"/>
+
+    </group>
 
 </menu>
