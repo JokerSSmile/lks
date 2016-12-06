@@ -5,10 +5,6 @@ import net.volgatech.lks.Pojo.Student;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Ultim on 06.12.2016.
- */
-
 public class StudentAdapter {
     private ArrayList<HashMap<String, String>> infoList;
     public StudentAdapter() {
