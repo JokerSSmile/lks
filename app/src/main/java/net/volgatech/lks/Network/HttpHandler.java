@@ -1,6 +1,9 @@
-package net.volgatech.lks;
+package net.volgatech.lks.Network;
 
 import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
