@@ -14,6 +14,7 @@
     <string name="progress">Успеваемость</string>
     <string name="grants">Стипендии</string>
     <string name="settings">Настройки</string>
+    <string name="exit">Выход</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
