@@ -16,10 +16,8 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 
 import net.volgatech.lks.Adapter.StudentAdapter;
-import net.volgatech.lks.JsonUtility.JsonParser;
 import net.volgatech.lks.JsonUtility.JsonParser;
 import net.volgatech.lks.Network.HttpHandler;
 import net.volgatech.lks.Pojo.Student;
@@ -29,7 +27,6 @@ import net.volgatech.lks.activity.MainActivity;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -139,8 +136,8 @@ public class InfoFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             ListView lv = (ListView) getActivity().findViewById(R.id.list);
             ListAdapter adapter = new SimpleAdapter(
                     getActivity(),  contactList,
-                    R.layout.list_item, new String[]{"header", "value"},
-                    new int[]{R.id.name, R.id.email});
+                    R.layout.list_item_student, new String[]{"header", "value"},
+                    new int[]{R.id.header, R.id.value});
 
             lv.setAdapter(adapter);
         }

@@ -14,6 +14,7 @@ public class Student {
     public EduGroup eduGroup;
 
     public class Oop {
+        public String Faculty;
         public String Kafedra;
         public String FullStdName;
         public String FullSpzName;
