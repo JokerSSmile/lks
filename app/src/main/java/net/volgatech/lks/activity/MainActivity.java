@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import net.volgatech.lks.R;
 import net.volgatech.lks.fragments.AchievementsFragment;
 import net.volgatech.lks.fragments.EducationFragment;
+import net.volgatech.lks.fragments.ExamsFragment;
 import net.volgatech.lks.fragments.GrantsFragment;
 import net.volgatech.lks.fragments.InfoFragment;
 import net.volgatech.lks.fragments.ProgressFragment;
@@ -115,6 +116,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.education:
                 fragment = new EducationFragment();
                 title = getString(R.string.education);
+                viewIsAtHome = false;
+                break;
+            case R.id.exams:
+                fragment = new ExamsFragment();
+                title = getString(R.string.exams);
                 viewIsAtHome = false;
                 break;
             case R.id.achievements:
