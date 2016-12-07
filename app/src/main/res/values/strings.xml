@@ -2,9 +2,9 @@
     <string name="app_name">Личный кабинет студента</string>
 
     <!-- Main info -->
-    <string name="student_name">Имя</string>
+    <string name="student_name">Патрушев Олег</string>
     <string name="student_surname">Фамилия</string>
-    <string name="student_group">ПС-11</string>
+    <string name="student_group">ПС-21</string>
 
     <!-- Pages titles -->
     <string name="info">Обо мне</string>
@@ -22,6 +22,14 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string-array name="spin">
+        <item>Текущий семестр</item>
+        <item>1 семестр</item>
+        <item>2 семестр</item>
+        <item>3 семестр</item>
+        <item>4 семестр</item>
+    </string-array>
 
 
 

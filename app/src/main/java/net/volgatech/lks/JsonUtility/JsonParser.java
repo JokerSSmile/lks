@@ -31,46 +31,5 @@ public class JsonParser {
         }
     }
 
-    public void SaveJSFile(FileOutputStream fos, String strFile, String nameFile){
-        try {
-            fos.write(strFile.getBytes());
-            //Toast.makeText(this, "Файл сохранен", Toast.LENGTH_SHORT).show();
-        }
-        catch(IOException ex) {
-            //
-        }
-        finally{
-            try{
-                if(fos!=null)
-                    fos.close();
-            }
-            catch(IOException ex){
-                //Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
-    public String OpenJS(FileInputStream fin) {
-        String text = null;
-        try {
-
-            byte[] bytes = new byte[fin.available()];
-            fin.read(bytes);
-            text = new String(bytes);
-        }
-        catch(IOException ex){
-            //Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-        finally {
-            try{
-                if(fin!=null) {
-                    fin.close();
-                }
-            }
-            catch(IOException ex){
-                //Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }
-        return text;
-    }
 }
