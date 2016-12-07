@@ -46,6 +46,7 @@ public class GrantsFragment extends Fragment implements TabLayout.OnTabSelectedL
     public void onTabSelected(TabLayout.Tab tab) {
 
         tabLayout.setScrollPosition(tab.getPosition(), 0f, true);
+        viewPager.setCurrentItem(tab.getPosition());
     }
 
     @Override
