@@ -23,6 +23,14 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string-array name="spin">
+        <item>Текущий семестр</item>
+        <item>1 семестр</item>
+        <item>2 семестр</item>
+        <item>3 семестр</item>
+        <item>4 семестр</item>
+    </string-array>
+
 
 
 </resources>

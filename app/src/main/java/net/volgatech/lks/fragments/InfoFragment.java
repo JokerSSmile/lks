@@ -47,7 +47,6 @@ public class InfoFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.new_page_activity);
         swipeLayout.setOnRefreshListener(this);
         contactList = new ArrayList<>();
-        jsonParser = new JsonParser();
         new GetContacts().execute();
         return view;
 
@@ -84,27 +83,27 @@ public class InfoFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         @Override
         protected Void doInBackground(Void... arg0) {
             HttpHandler httpHandler = new HttpHandler();
-
+            JsonParser jsonParser = new JsonParser();
             // Making a request to url and getting response
             String jsonStr = httpHandler.makeServiceCall(url);
-            try {
-                fos = getActivity().openFileOutput("5.js", MODE_PRIVATE);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
             Log.e(TAG, "Response from url: " + jsonStr);
             if (jsonStr == null){
                 try {
                     fin = getActivity().openFileInput("5.js");
+                    jsonStr = httpHandler.OpenJS(fin);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-                jsonStr = jsonParser.OpenJS(fin);
             }
             else {
-                jsonParser.SaveJSFile(fos, jsonStr, "5.js");
+                try {
+                    fos =  getActivity().openFileOutput("5.js", MODE_PRIVATE);
+                    httpHandler.SaveJSFile(fos, jsonStr);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
-            if (jsonStr != null) {
+            if (jsonStr != null && jsonStr != "") {
                 Gson gson = new Gson();
                 Student student = gson.fromJson(jsonStr, Student.class);
                 StudentAdapter studentAdapter = new StudentAdapter();

@@ -9,9 +9,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -31,21 +34,32 @@ import java.util.HashMap;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class ExamsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class ExamsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemSelectedListener {
     SwipeRefreshLayout swipeLayout;
+    Spinner spinner;
     private String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
         private static final String url = "http://www.mocky.io/v2/584704103f0000090dfe6939";
     private static final String nameFile = "Exam.js";
     private JsonParser jsonParser;
+    private ExamAdapter examAdapter;
     private ArrayList<HashMap<String, String>> examList;
-
+    private Exam exams;
+    private int numItem = 0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.exams_fragment, container, false);
         swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.exam_page_activity);
         swipeLayout.setOnRefreshListener(this);
+        spinner = (Spinner) view.findViewById(R.id.spinner_exam);
+        String[] strings = {"Текущий семестр", "1 Семестр", "2 Семестр", "3 Семестр", "4 Семестр"};
+        ArrayAdapter adapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, strings);
+        // Определяем разметку для использования при выборе элемента
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Применяем адаптер к элементу spinner
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
         jsonParser = new JsonParser();
         new GetContacts().execute();
         return view;
@@ -61,6 +75,20 @@ public class ExamsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         Log.e(TAG, "Swipe done");
         new GetContacts().execute();
         swipeLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        Object item = adapterView.getItemAtPosition(i);
+        if (i != numItem){
+            numItem = i;
+            new GetContacts().execute();
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 
     private class GetContacts extends AsyncTask<Void, Void, Void> {
@@ -83,29 +111,34 @@ public class ExamsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
             HttpHandler httpHandler = new HttpHandler();
             // Making a request to url and getting response
             String jsonStr = httpHandler.makeServiceCall(url);
-            try {
-                fos = getActivity().openFileOutput(nameFile, MODE_PRIVATE);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
             Log.e(TAG, "Response from url: " + jsonStr);
             if (jsonStr == null){
                 try {
                     fin = getActivity().openFileInput(nameFile);
+                    jsonStr = httpHandler.OpenJS(fin);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-                jsonStr = jsonParser.OpenJS(fin);
             }
             else {
-                jsonParser.SaveJSFile(fos, jsonStr, nameFile);
+                try {
+                    fos =  getActivity().openFileOutput(nameFile, MODE_PRIVATE);
+                    httpHandler.SaveJSFile(fos, jsonStr);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
             if (jsonStr != null) {
                 Gson gson = new Gson();
-                Exam exams = gson.fromJson(jsonStr, Exam.class);
+                exams = gson.fromJson(jsonStr, Exam.class);
                 int a = exams.countExam;
-                ExamAdapter examAdapter = new ExamAdapter();
-                examList = examAdapter.getCurrentSemester(exams);
+                examAdapter = new ExamAdapter();
+                if (numItem == 0) {
+                    examList = examAdapter.getCurrentSemester(exams);
+                } else {
+                    examList = examAdapter.getNumberSemester(exams, numItem - 1);
+                }
+
             } else {
                 Log.e(TAG, "Couldn't get json from server.");
                 getActivity().runOnUiThread(new Runnable() {
@@ -127,7 +160,6 @@ public class ExamsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
             // Dismiss the progress dialog
             if (pDialog.isShowing() && (!swipeLayout.isRefreshing()))
                 pDialog.dismiss();
-
             //Updating parsed JSON data into ListView
             ListView lv = (ListView) getActivity().findViewById(R.id.exam_item_list);
             ListAdapter adapter = new SimpleAdapter(
