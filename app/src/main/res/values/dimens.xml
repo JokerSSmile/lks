@@ -7,4 +7,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_zero_margin">0dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <!-- Text sizes -->
+    <dimen name="m_text_size">16sp</dimen>
 </resources>

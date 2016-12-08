@@ -13,7 +13,7 @@ import net.volgatech.lks.R;
 
 public class GrantsFragment extends Fragment implements TabLayout.OnTabSelectedListener, ViewPager.OnPageChangeListener {
 
-    TabLayout tabLayout;
+    TabLayout tabLayout = null;
     ViewPager viewPager;
 
     @Override

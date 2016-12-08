@@ -56,9 +56,9 @@ public class ExamsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         swipeLayout.setOnRefreshListener(this);
         spinner = (Spinner) view.findViewById(R.id.spinner_exam);
         String[] strings = {"Текущий семестр", "1 Семестр", "2 Семестр", "3 Семестр", "4 Семестр"};
-        ArrayAdapter adapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, strings);
+        ArrayAdapter adapter = new ArrayAdapter<>(getContext(), R.layout.p_spinner, strings);
         // Определяем разметку для использования при выборе элемента
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.p_spinner_list_item);
         // Применяем адаптер к элементу spinner
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);

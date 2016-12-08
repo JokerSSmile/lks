@@ -2,21 +2,18 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/grantsLayout"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <android.support.design.widget.TabLayout
+        style="@style/NavigationTab"
         android:id="@+id/grantsTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:tabIndicatorHeight="3dp"
-        app:tabIndicatorColor="@color/white"
-        app:tabTextColor="@color/white"/>
+        />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/grantsPager"
