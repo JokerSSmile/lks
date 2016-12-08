@@ -13,6 +13,6 @@ public class GrantsPretendantTab extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.grants_pretendant_tab, container, false);
+        return inflater.inflate(R.layout.t_grants_pretendant_tab, container, false);
     }
 }

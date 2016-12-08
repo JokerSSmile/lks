@@ -35,21 +35,23 @@ import java.util.HashMap;
 import static android.content.Context.MODE_PRIVATE;
 
 public class ExamsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemSelectedListener {
+
     SwipeRefreshLayout swipeLayout;
     Spinner spinner;
     private String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
-        private static final String url = "http://www.mocky.io/v2/584704103f0000090dfe6939";
+    private static final String url = "http://www.mocky.io/v2/584704103f0000090dfe6939";
     private static final String nameFile = "Exam.js";
     private JsonParser jsonParser;
     private ExamAdapter examAdapter;
     private ArrayList<HashMap<String, String>> examList;
     private Exam exams;
     private int numItem = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.exams_fragment, container, false);
+        View view = inflater.inflate(R.layout.f_exams_fragment, container, false);
         swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.exam_page_activity);
         swipeLayout.setOnRefreshListener(this);
         spinner = (Spinner) view.findViewById(R.id.spinner_exam);
@@ -164,7 +166,7 @@ public class ExamsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
             ListView lv = (ListView) getActivity().findViewById(R.id.exam_item_list);
             ListAdapter adapter = new SimpleAdapter(
                     getActivity(),  examList,
-                    R.layout.list_item_exam, new String[]{"title", "date", "location", "teacher"},
+                    R.layout.p_list_item_exam, new String[]{"title", "date", "location", "teacher"},
                     new int[]{R.id.title_exam, R.id.date_exam, R.id.location_exam, R.id.teacher_exam});
 
             lv.setAdapter(adapter);

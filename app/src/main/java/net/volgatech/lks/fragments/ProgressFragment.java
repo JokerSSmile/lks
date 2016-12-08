@@ -13,6 +13,6 @@ public class ProgressFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        return inflater.inflate(R.layout.progress_fragment, container, false);
+        return inflater.inflate(R.layout.f_progress_fragment, container, false);
     }
 }

@@ -43,7 +43,7 @@ public class InfoFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.info_fragment, container, false);
+        View view = inflater.inflate(R.layout.f_info_fragment, container, false);
         swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.new_page_activity);
         swipeLayout.setOnRefreshListener(this);
         contactList = new ArrayList<>();
@@ -135,7 +135,7 @@ public class InfoFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             ListView lv = (ListView) getActivity().findViewById(R.id.list);
             ListAdapter adapter = new SimpleAdapter(
                     getActivity(),  contactList,
-                    R.layout.list_item_student, new String[]{"header", "value"},
+                    R.layout.p_list_item_student, new String[]{"header", "value"},
                     new int[]{R.id.header, R.id.value});
 
             lv.setAdapter(adapter);
