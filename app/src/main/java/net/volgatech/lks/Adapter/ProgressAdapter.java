@@ -27,7 +27,12 @@ public class ProgressAdapter {
         for (int i = 0; i < progress.Subjects.length; i++) {
             HashMap<String, String> hashMap = new HashMap<>();
             hashMap.put("title", progress.Subjects[i].SubjectName);
-            hashMap.put("mark", progress.Subjects[i].MarkValue);
+            if (progress.Subjects[i].MarkValue == "6")
+            {
+                hashMap.put("mark", "зач.");
+            } else {
+                hashMap.put("mark", progress.Subjects[i].MarkValue);
+            }
 
             if (progress.Subjects[i].ResultBall != null) {
                 hashMap.put("ball", progress.Subjects[i].ResultBall);
