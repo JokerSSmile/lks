@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -31,6 +32,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -168,7 +170,6 @@ public class ExamsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                     getActivity(),  examList,
                     R.layout.p_list_item_exam, new String[]{"title", "date", "location", "teacher"},
                     new int[]{R.id.title_exam, R.id.date_exam, R.id.location_exam, R.id.teacher_exam});
-
             lv.setAdapter(adapter);
         }
     }

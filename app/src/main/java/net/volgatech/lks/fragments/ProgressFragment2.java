@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import net.volgatech.lks.R;
 
-public class ScheduleFragment extends Fragment {
+public class ProgressFragment2 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
