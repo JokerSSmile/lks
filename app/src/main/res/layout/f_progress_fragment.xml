@@ -15,7 +15,7 @@
     </Spinner>
 
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/schedule_page_activity"
+        android:id="@+id/progress_page_activity"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

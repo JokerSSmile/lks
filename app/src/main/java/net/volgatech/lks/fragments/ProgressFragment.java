@@ -49,7 +49,7 @@ public class ProgressFragment extends Fragment implements SwipeRefreshLayout.OnR
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.f_progress_fragment, container, false);
-        swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.schedule_page_activity);
+        swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.progress_page_activity);
         swipeLayout.setOnRefreshListener(this);
         spinner = (Spinner) view.findViewById(R.id.spinner_schedule);
         String[] strings = {"1 Семестр", "2 Семестр"};
