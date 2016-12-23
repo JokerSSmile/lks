@@ -7,6 +7,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/achievements"/>
+        android:text="Пример Json файла так и не пришёл. Сами напишем пример к 30 декабря. Ждём от вас Json файла или 30 декабря"/>
 
 </LinearLayout>

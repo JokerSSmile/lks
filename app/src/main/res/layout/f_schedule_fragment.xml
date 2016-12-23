@@ -7,6 +7,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/progress"/>
+        android:text="Расписание добавиться в начале января. Может быть раньше"/>
 
 </LinearLayout>
