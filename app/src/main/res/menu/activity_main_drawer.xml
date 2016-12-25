@@ -8,14 +8,6 @@
             android:icon="@drawable/ic_menu_about"
             android:title="@string/info"/>
         <item
-            android:id="@+id/schedule"
-            android:icon="@drawable/ic_menu_schedule"
-            android:title="@string/schedule"/>
-        <item
-            android:id="@+id/education"
-            android:icon="@drawable/ic_menu_education"
-            android:title="@string/education"/>
-        <item
             android:id="@+id/achievements"
             android:icon="@drawable/ic_menu_achievements"
             android:title="@string/achievements"/>

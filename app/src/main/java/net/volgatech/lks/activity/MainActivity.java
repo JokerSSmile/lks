@@ -112,11 +112,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 title = getString(R.string.progress);
                 viewIsAtHome = false;
                 break;
-            case R.id.education:
-                fragment = new EducationFragment();
-                title = getString(R.string.education);
-                viewIsAtHome = false;
-                break;
             case R.id.exams:
                 fragment = new ExamsFragment();
                 title = getString(R.string.exams);
@@ -125,11 +120,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.achievements:
                 fragment = new AchievementsFragment();
                 title = getString(R.string.achievements);
-                viewIsAtHome = false;
-                break;
-            case R.id.schedule:
-                fragment = new ProgressFragment2();
-                title = getString(R.string.schedule);
                 viewIsAtHome = false;
                 break;
             case R.id.grants:
