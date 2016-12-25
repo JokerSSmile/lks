@@ -49,6 +49,7 @@ public class GrantsTab extends Fragment implements SwipeRefreshLayout.OnRefreshL
         swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.grants_page_activity);
         swipeLayout.setOnRefreshListener(this);
         grantList = new ArrayList<>();
+        new GetContacts().execute();
         return view;
     }
 
@@ -120,8 +121,8 @@ public class GrantsTab extends Fragment implements SwipeRefreshLayout.OnRefreshL
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             // Dismiss the progress dialog
-           // if (pDialog.isShowing() && (!swipeLayout.isRefreshing()))
-               // pDialog.dismiss();
+            if (pDialog.isShowing() && (!swipeLayout.isRefreshing()))
+                pDialog.dismiss();
 
             ListView lv = (ListView) getActivity().findViewById(R.id.grant_item_list);
             ListAdapter adapter = new SimpleAdapter(

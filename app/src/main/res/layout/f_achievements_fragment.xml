@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
+    <ListView
+        android:id="@+id/achievements_list_sum_mark"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Пример Json файла так и не пришёл. Сами напишем пример к 30 декабря. Ждём от вас Json файла или 30 декабря"/>
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:orientation="horizontal">
+    </ListView>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/achievements_page_activity"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical">
+
+        <ListView
+            android:id="@+id/achievements_item_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false">
+        </ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
 
 </LinearLayout>
