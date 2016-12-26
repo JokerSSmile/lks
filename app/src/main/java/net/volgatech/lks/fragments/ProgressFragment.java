@@ -38,7 +38,7 @@ public class ProgressFragment extends Fragment implements SwipeRefreshLayout.OnR
     Spinner spinner;
     private String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
-    private  String nameFile = "25.js";
+    private  String nameFile[] = {"progress1.js", "progress2.js"};
     private int numItem = 0;
     private String[] url = {"http://www.mocky.io/v2/585d29821000008d0f501e18", "http://www.mocky.io/v2/584fa1372a0000450de8f4a9"};
     private Progress progress;
@@ -59,6 +59,7 @@ public class ProgressFragment extends Fragment implements SwipeRefreshLayout.OnR
         // Применяем адаптер к элементу spinner
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+        progressList = new ArrayList<>();
         new GetContacts().execute();
         return view;
     }
@@ -111,7 +112,7 @@ public class ProgressFragment extends Fragment implements SwipeRefreshLayout.OnR
             Log.e(TAG, "Response from url: " + jsonStr);
             if (jsonStr == null){
                 try {
-                    fin = getActivity().openFileInput(nameFile);
+                    fin = getActivity().openFileInput(nameFile[numItem]);
                     jsonStr = httpHandler.OpenJS(fin);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -119,7 +120,7 @@ public class ProgressFragment extends Fragment implements SwipeRefreshLayout.OnR
             }
             else {
                 try {
-                    fos =  getActivity().openFileOutput(nameFile, MODE_PRIVATE);
+                    fos =  getActivity().openFileOutput(nameFile[numItem], MODE_PRIVATE);
                     httpHandler.SaveJSFile(fos, jsonStr);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -153,15 +154,12 @@ public class ProgressFragment extends Fragment implements SwipeRefreshLayout.OnR
             if (pDialog.isShowing() && (!swipeLayout.isRefreshing()))
                 pDialog.dismiss();
             //Updating parsed JSON data into ListView
-            if (progressList != null){
-                ListView lv = (ListView) getActivity().findViewById(R.id.progress_item_list);
-                ListAdapter adapter = new SimpleAdapter(
-                        getActivity(),  progressList,
-                        R.layout.p_progress_item_list, new String[]{"title", "mark", "ball", "date"},
-                        new int[]{R.id.title_progress, R.id.mark_progress, R.id.ball_progress, R.id.date_progress});
-                lv.setAdapter(adapter);
-            }
-
+            ListView lv = (ListView) getActivity().findViewById(R.id.progress_item_list);
+            ListAdapter adapter = new SimpleAdapter(
+                    getActivity(), progressList,
+                    R.layout.p_progress_item_list, new String[]{"title", "mark", "ball", "date"},
+                    new int[]{R.id.title_progress, R.id.mark_progress, R.id.ball_progress, R.id.date_progress});
+            lv.setAdapter(adapter);
 
         }
     }

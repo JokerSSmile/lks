@@ -65,6 +65,7 @@ public class ExamsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
         jsonParser = new JsonParser();
+        examList = new ArrayList<>();
         new GetContacts().execute();
         return view;
     }
@@ -140,7 +141,7 @@ public class ExamsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                 if (numItem == 0){
                     examList = examAdapter.GetCurrentSemester(exams);
                 }else {
-                    examList = examAdapter.GetNumberSemester(exams, numItem);
+                    examList = examAdapter.GetNumberSemester(exams, numItem - 1);
                 }
 
 
@@ -169,15 +170,12 @@ public class ExamsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
             //Updating parsed JSON data into ListView
             ListView lv = (ListView) getActivity().findViewById(R.id.exam_item_list);
 
-            if (examList != null){
-                ListAdapter adapter = new SimpleAdapter(
-                        getActivity(),  examList,
-                        R.layout.p_list_item_exam, new String[]{"title", "date", "teacher", "location"},
-                        new int[]{R.id.title_exam, R.id.date_exam, R.id.teacher_exam, R.id.location_exam});
+            ListAdapter adapter = new SimpleAdapter(
+                    getActivity(), examList,
+                    R.layout.p_list_item_exam, new String[]{"title", "date", "teacher", "location"},
+                    new int[]{R.id.title_exam, R.id.date_exam, R.id.teacher_exam, R.id.location_exam});
 
-                lv.setAdapter(adapter);
-            }
-
+            lv.setAdapter(adapter);
         }
     }
 

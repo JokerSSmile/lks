@@ -40,7 +40,7 @@ public class ScheduleFragment extends Fragment implements SwipeRefreshLayout.OnR
     Spinner spinner;
     private String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
-    private  String nameFile = "Schedule.js";
+    private  String nameFile[] = {"Schedule1.js", "Schedule2.js","Schedule3.js","Schedule4.js", "Schedule5.js"};
     private int numItem = 0;
     private String[] url = {"http://www.mocky.io/v2/5860d1490f000018309c9aa9",
                             "http://www.mocky.io/v2/5860cca30f0000812f9c9aa2",
@@ -66,6 +66,7 @@ public class ScheduleFragment extends Fragment implements SwipeRefreshLayout.OnR
         // Применяем адаптер к элементу spinner
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+        scheduleList = new ArrayList<>();
         new GetContacts().execute();
         return view;
     }
@@ -118,7 +119,7 @@ public class ScheduleFragment extends Fragment implements SwipeRefreshLayout.OnR
             Log.e(TAG, "Response from url: " + jsonStr);
             if (jsonStr == null){
                 try {
-                    fin = getActivity().openFileInput(nameFile);
+                    fin = getActivity().openFileInput(nameFile[numItem]);
                     jsonStr = httpHandler.OpenJS(fin);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -126,7 +127,7 @@ public class ScheduleFragment extends Fragment implements SwipeRefreshLayout.OnR
             }
             else {
                 try {
-                    fos =  getActivity().openFileOutput(nameFile, MODE_PRIVATE);
+                    fos =  getActivity().openFileOutput(nameFile[numItem], MODE_PRIVATE);
                     httpHandler.SaveJSFile(fos, jsonStr);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -161,13 +162,11 @@ public class ScheduleFragment extends Fragment implements SwipeRefreshLayout.OnR
                 pDialog.dismiss();
 
             //Updating parsed JSON data into ListView
-            if (scheduleList != null){
-                ListView lv = (ListView) getActivity().findViewById(R.id.schedule_item_list);
-                ListAdapter adapter = new SimpleAdapter(
-                        getActivity(),  scheduleList,
-                        R.layout.p_list_item_schedule, new String[]{"time", "title", "teacher", "location"},
-                        new int[]{R.id.time_schedule, R.id.title_schedule, R.id.teacher_schedule, R.id.location_schedule})
-                {
+            ListView lv = (ListView) getActivity().findViewById(R.id.schedule_item_list);
+            ListAdapter adapter = new SimpleAdapter(
+                    getActivity(),  scheduleList,
+                    R.layout.p_list_item_schedule, new String[]{"time", "title", "teacher", "location"},
+                    new int[]{R.id.time_schedule, R.id.title_schedule, R.id.teacher_schedule, R.id.location_schedule}) {
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -183,14 +182,8 @@ public class ScheduleFragment extends Fragment implements SwipeRefreshLayout.OnR
                         }
                         return v;
                     }
-                };
-                if (scheduleList != null) {
-                    lv.setAdapter(adapter);
-                }
-            }
-
-
-
+                    };
+            lv.setAdapter(adapter);
         }
     }
 }
