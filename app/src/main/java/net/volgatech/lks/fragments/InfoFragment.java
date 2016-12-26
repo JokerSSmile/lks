@@ -132,6 +132,7 @@ public class InfoFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 pDialog.dismiss();
 
             //Updating parsed JSON data into ListView
+
             ListView lv = (ListView) getActivity().findViewById(R.id.list);
             ListAdapter adapter = new SimpleAdapter(
                     getActivity(),  contactList,

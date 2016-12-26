@@ -137,11 +137,13 @@ public class ExamsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                 exams = gson.fromJson(jsonStr, Exam.class);
                 int a = exams.countExam;
                 examAdapter = new ExamAdapter();
-                if (numItem == 0) {
-                    examList = examAdapter.getCurrentSemester(exams);
-                } else {
-                    examList = examAdapter.getNumberSemester(exams, numItem - 1);
+                if (numItem == 0){
+                    examList = examAdapter.GetCurrentSemester(exams);
+                }else {
+                    examList = examAdapter.GetNumberSemester(exams, numItem);
                 }
+
+
 
             } else {
                 Log.e(TAG, "Couldn't get json from server.");
@@ -166,11 +168,16 @@ public class ExamsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                 pDialog.dismiss();
             //Updating parsed JSON data into ListView
             ListView lv = (ListView) getActivity().findViewById(R.id.exam_item_list);
-            ListAdapter adapter = new SimpleAdapter(
-                    getActivity(),  examList,
-                    R.layout.p_list_item_exam, new String[]{"title", "date", "location", "teacher"},
-                    new int[]{R.id.title_exam, R.id.date_exam, R.id.location_exam, R.id.teacher_exam});
-            lv.setAdapter(adapter);
+
+            if (examList != null){
+                ListAdapter adapter = new SimpleAdapter(
+                        getActivity(),  examList,
+                        R.layout.p_list_item_exam, new String[]{"title", "date", "teacher", "location"},
+                        new int[]{R.id.title_exam, R.id.date_exam, R.id.teacher_exam, R.id.location_exam});
+
+                lv.setAdapter(adapter);
+            }
+
         }
     }
 
