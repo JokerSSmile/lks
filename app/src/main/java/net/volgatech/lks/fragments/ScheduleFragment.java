@@ -182,7 +182,10 @@ public class ScheduleFragment extends Fragment implements SwipeRefreshLayout.OnR
                     return v;
                 }
             };
-            lv.setAdapter(adapter);
+            if (scheduleList != null) {
+                lv.setAdapter(adapter);
+            }
+
         }
     }
 }

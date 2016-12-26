@@ -3,14 +3,16 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10sp">
+    android:padding="10sp"
+    android:weightSum="100">
 
     <TextView
         android:textSize="15sp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/time_schedule"
         android:padding="5sp"
-        android:layout_width="50sp"
+        android:layout_width="0dp"
+        android:layout_weight="20"
         android:layout_height="wrap_content"
         android:text="8.00"/>
 
@@ -19,7 +21,8 @@
         android:textColor="@color/colorPrimaryDark"
         android:id="@+id/title_schedule"
         android:padding="5sp"
-        android:layout_width="130sp"
+        android:layout_width="0dp"
+        android:layout_weight="35"
         android:layout_height="wrap_content"
         android:text="Компьютерная графика"
         android:textStyle="normal|bold" />
@@ -29,7 +32,8 @@
         android:textColor="@color/colorPrimary"
         android:id="@+id/teacher_schedule"
         android:padding="5sp"
-        android:layout_width="109dp"
+        android:layout_width="0dp"
+        android:layout_weight="30"
         android:layout_height="wrap_content"
         android:text="Петров Д.И." />
 
@@ -38,7 +42,8 @@
         android:textColor="@color/colorPrimary"
         android:id="@+id/location_schedule"
         android:padding="5sp"
-        android:layout_width="70sp"
+        android:layout_width="0dp"
+        android:layout_weight="15"
         android:layout_height="wrap_content"
         android:text="522 / I"/>
 </LinearLayout>
