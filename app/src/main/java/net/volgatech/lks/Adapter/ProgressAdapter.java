@@ -27,11 +27,11 @@ public class ProgressAdapter {
         for (int i = 0; i < progress.Subjects.length; i++) {
             HashMap<String, String> hashMap = new HashMap<>();
             hashMap.put("title", progress.Subjects[i].SubjectName);
-            if (progress.Subjects[i].MarkValue == "6")
+            if (progress.Subjects[i].MarkValue == 6)
             {
                 hashMap.put("mark", "зач.");
             } else {
-                hashMap.put("mark", progress.Subjects[i].MarkValue);
+                hashMap.put("mark", progress.Subjects[i].MarkValue.toString());
             }
 
             if (progress.Subjects[i].ResultBall != null) {
@@ -41,7 +41,7 @@ public class ProgressAdapter {
             }
             String timestamp = progress.Subjects[i].MarkDate.replace("/Date(", "").replace(")/", "");
             Date createdOn = new Date(Long.parseLong(timestamp));
-            SimpleDateFormat sdf = new SimpleDateFormat("MM dd yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
             String formattedDate = sdf.format(createdOn);
             hashMap.put("date", formattedDate);
 

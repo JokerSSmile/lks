@@ -13,7 +13,7 @@ public class Progress {
     public String BlockName;
     public class Subjects {
         public String SubjectName;
-        public String MarkValue;
+        public Integer MarkValue;
         public String MarkDate;
         public String ResultBall;
     }
