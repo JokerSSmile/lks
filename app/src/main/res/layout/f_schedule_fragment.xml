@@ -4,9 +4,31 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="48sp"
+        android:gravity="center"
+        android:id="@+id/spinner_schedule"
+        android:spinnerMode="dropdown"
+        android:background="@color/colorAccent">
+    </Spinner>
+
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/schedule_page_activity"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Расписание добавиться в начале января. Может быть раньше"/>
+        android:scrollbars="vertical">
+
+        <ListView
+            android:id="@+id/schedule_item_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false">
+        </ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

@@ -18,7 +18,7 @@ import net.volgatech.lks.fragments.EducationFragment;
 import net.volgatech.lks.fragments.ExamsFragment;
 import net.volgatech.lks.fragments.GrantsFragment;
 import net.volgatech.lks.fragments.InfoFragment;
-import net.volgatech.lks.fragments.ProgressFragment2;
+import net.volgatech.lks.fragments.ScheduleFragment;
 import net.volgatech.lks.fragments.ProgressFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -112,11 +112,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 title = getString(R.string.progress);
                 viewIsAtHome = false;
                 break;
-            case R.id.education:
-                fragment = new EducationFragment();
-                title = getString(R.string.education);
-                viewIsAtHome = false;
-                break;
             case R.id.exams:
                 fragment = new ExamsFragment();
                 title = getString(R.string.exams);
@@ -128,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 viewIsAtHome = false;
                 break;
             case R.id.schedule:
-                fragment = new ProgressFragment2();
+                fragment = new ScheduleFragment();
                 title = getString(R.string.schedule);
                 viewIsAtHome = false;
                 break;

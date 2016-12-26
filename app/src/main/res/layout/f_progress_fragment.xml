@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="48sp"
         android:gravity="center"
-        android:id="@+id/spinner_schedule"
+        android:id="@+id/spinner_progress"
         android:entries="@array/spin"
         android:spinnerMode="dropdown"
         android:background="@color/colorAccent">
@@ -22,7 +22,7 @@
         android:scrollbars="vertical">
 
         <ListView
-            android:id="@+id/schedule_item_list"
+            android:id="@+id/progress_item_list"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
