@@ -153,12 +153,16 @@ public class ProgressFragment extends Fragment implements SwipeRefreshLayout.OnR
             if (pDialog.isShowing() && (!swipeLayout.isRefreshing()))
                 pDialog.dismiss();
             //Updating parsed JSON data into ListView
-            ListView lv = (ListView) getActivity().findViewById(R.id.progress_item_list);
-            ListAdapter adapter = new SimpleAdapter(
-                    getActivity(),  progressList,
-                    R.layout.p_progress_item_list, new String[]{"title", "mark", "ball", "date"},
-                    new int[]{R.id.title_progress, R.id.mark_progress, R.id.ball_progress, R.id.date_progress});
-            lv.setAdapter(adapter);
+            if (progressList != null){
+                ListView lv = (ListView) getActivity().findViewById(R.id.progress_item_list);
+                ListAdapter adapter = new SimpleAdapter(
+                        getActivity(),  progressList,
+                        R.layout.p_progress_item_list, new String[]{"title", "mark", "ball", "date"},
+                        new int[]{R.id.title_progress, R.id.mark_progress, R.id.ball_progress, R.id.date_progress});
+                lv.setAdapter(adapter);
+            }
+
+
         }
     }
 }

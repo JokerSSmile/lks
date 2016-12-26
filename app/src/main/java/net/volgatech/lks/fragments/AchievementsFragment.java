@@ -131,20 +131,23 @@ public class AchievementsFragment extends Fragment implements SwipeRefreshLayout
             if (pDialog.isShowing() && (!swipeLayout.isRefreshing()))
                 pDialog.dismiss();
 
-            ListView lv = (ListView) getActivity().findViewById(R.id.achievements_item_list);
-            ListView lvSumMark = (ListView) getActivity().findViewById(R.id.achievements_list_sum_mark);
+            if ((achievementsList != null) && (achievementsSumMarkList != null)){
+                ListView lv = (ListView) getActivity().findViewById(R.id.achievements_item_list);
+                ListView lvSumMark = (ListView) getActivity().findViewById(R.id.achievements_list_sum_mark);
 
-            ListAdapter adapter = new SimpleAdapter(
-                    getActivity(),  achievementsList,
-                    R.layout.p_list_item_achievements, new String[]{"criterion", "subcriterion", "mark", "date"},
-                    new int[]{R.id.criterion_achievements, R.id.sub_criterion_achievements, R.id.mark_achievements, R.id.date_achievements});
-            ListAdapter adapterSumMark = new SimpleAdapter(
-                    getActivity(),  achievementsSumMarkList,
-                    R.layout.p_list_sum_mark_achivmemts, new String[]{"sum"},
-                    new int[]{R.id.achievements_sum_mark});
+                ListAdapter adapter = new SimpleAdapter(
+                        getActivity(),  achievementsList,
+                        R.layout.p_list_item_achievements, new String[]{"criterion", "subcriterion", "mark", "date"},
+                        new int[]{R.id.criterion_achievements, R.id.sub_criterion_achievements, R.id.mark_achievements, R.id.date_achievements});
+                ListAdapter adapterSumMark = new SimpleAdapter(
+                        getActivity(),  achievementsSumMarkList,
+                        R.layout.p_list_sum_mark_achivmemts, new String[]{"sum"},
+                        new int[]{R.id.achievements_sum_mark});
 
-            lv.setAdapter(adapter);
-            lvSumMark.setAdapter(adapterSumMark);
+                lv.setAdapter(adapter);
+                lvSumMark.setAdapter(adapterSumMark);
+            }
+
         }
     }
 }

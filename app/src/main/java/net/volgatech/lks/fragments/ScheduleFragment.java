@@ -159,32 +159,37 @@ public class ScheduleFragment extends Fragment implements SwipeRefreshLayout.OnR
             // Dismiss the progress dialog
             if (pDialog.isShowing() && (!swipeLayout.isRefreshing()))
                 pDialog.dismiss();
-            //Updating parsed JSON data into ListView
-            ListView lv = (ListView) getActivity().findViewById(R.id.schedule_item_list);
-            ListAdapter adapter = new SimpleAdapter(
-                    getActivity(),  scheduleList,
-                    R.layout.p_list_item_schedule, new String[]{"time", "title", "teacher", "location"},
-                    new int[]{R.id.time_schedule, R.id.title_schedule, R.id.teacher_schedule, R.id.location_schedule})
-            {
-                @Override
-                public View getView(int position, View convertView, ViewGroup parent) {
 
-                    View v = super.getView(position, convertView, parent);
-                    if (scheduleList.get(position).get("color") == "red") {
-                        v.setBackgroundColor(getResources().getColor(R.color.red));
+            //Updating parsed JSON data into ListView
+            if (scheduleList != null){
+                ListView lv = (ListView) getActivity().findViewById(R.id.schedule_item_list);
+                ListAdapter adapter = new SimpleAdapter(
+                        getActivity(),  scheduleList,
+                        R.layout.p_list_item_schedule, new String[]{"time", "title", "teacher", "location"},
+                        new int[]{R.id.time_schedule, R.id.title_schedule, R.id.teacher_schedule, R.id.location_schedule})
+                {
+                    @Override
+                    public View getView(int position, View convertView, ViewGroup parent) {
+
+                        View v = super.getView(position, convertView, parent);
+                        if (scheduleList.get(position).get("color") == "red") {
+                            v.setBackgroundColor(getResources().getColor(R.color.red));
+                        }
+                        if (scheduleList.get(position).get("color") == "blue") {
+                            v.setBackgroundColor(getResources().getColor(R.color.blue));
+                        }
+                        if (scheduleList.get(position).get("color") == "no") {
+                            v.setBackgroundColor(getResources().getColor(R.color.white));
+                        }
+                        return v;
                     }
-                    if (scheduleList.get(position).get("color") == "blue") {
-                        v.setBackgroundColor(getResources().getColor(R.color.blue));
-                    }
-                    if (scheduleList.get(position).get("color") == "no") {
-                        v.setBackgroundColor(getResources().getColor(R.color.white));
-                    }
-                    return v;
+                };
+                if (scheduleList != null) {
+                    lv.setAdapter(adapter);
                 }
-            };
-            if (scheduleList != null) {
-                lv.setAdapter(adapter);
             }
+
+
 
         }
     }
